@@ -1,0 +1,22 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isEgenUser() {
+      return request.auth != null && request.auth.token.email.matches('.*@egen[.]ai$');
+    }
+    function isSuperAdmin() {
+      return request.auth != null && request.auth.token.email == 'karthik.patil@egen.ai';
+    }
+    match /config/{doc} {
+      allow read: if isEgenUser();
+      allow write: if isSuperAdmin();
+    }
+    match /projects/{projectId} {
+      allow read: if isEgenUser();
+      allow write: if isEgenUser();
+    }
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,6 +1,9 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import mermaid from 'mermaid';
+import DOMPurify from 'dompurify';
+import { exportAsDocx, exportAsPptx, exportAsXlsx, exportAsPdf, exportAsMarkdown } from '../../services/exporters';
 
 mermaid.initialize({
   startOnLoad: false,
@@ -28,11 +31,11 @@ function MermaidDiagram({ code }) {
         const id = `mermaid-${Date.now()}`;
         const { svg } = await mermaid.render(id, code);
         if (!cancelled && containerRef.current) {
-          containerRef.current.innerHTML = svg;
+          containerRef.current.innerHTML = DOMPurify.sanitize(svg);
         }
       } catch {
         if (!cancelled && containerRef.current) {
-          containerRef.current.innerHTML = `<pre style="color: #8b8fa3; font-size: 12px;">${code}</pre>`;
+          containerRef.current.innerHTML = DOMPurify.sanitize(`<pre style="color: #8b8fa3; font-size: 12px;">${code}</pre>`);
         }
       }
     }
@@ -47,6 +50,7 @@ function MarkdownRenderer({ content }) {
   return (
     <div className="markdown-content">
       <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
         components={{
           code({ className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || '');
@@ -77,15 +81,23 @@ function MarkdownRenderer({ content }) {
   );
 }
 
+const FORMATS = [
+  { id: 'md', label: '.md', fn: exportAsMarkdown },
+  { id: 'docx', label: '.docx', fn: exportAsDocx },
+  { id: 'pptx', label: '.pptx', fn: exportAsPptx },
+  { id: 'xlsx', label: '.xlsx', fn: exportAsXlsx },
+  { id: 'pdf', label: '.pdf', fn: exportAsPdf },
+];
+
 export default function DeliverableViewer({ title, content, onClose }) {
-  const handleDownload = useCallback(() => {
-    const blob = new Blob([content], { type: 'text/markdown' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.md`;
-    a.click();
-    URL.revokeObjectURL(url);
+  const [showFormats, setShowFormats] = useState(false);
+
+  const handleDownload = useCallback((format) => {
+    const fmt = FORMATS.find(f => f.id === format);
+    if (fmt) {
+      fmt.fn(title, content);
+    }
+    setShowFormats(false);
   }, [content, title]);
 
   // Close on escape key
@@ -105,9 +117,20 @@ export default function DeliverableViewer({ title, content, onClose }) {
         <div className="deliverable-modal-header">
           <h3>{title}</h3>
           <div className="deliverable-modal-actions">
-            <button className="btn-icon" onClick={handleDownload}>
-              Download .md
-            </button>
+            <div className="download-dropdown-wrapper">
+              <button className="btn-icon" onClick={() => setShowFormats(!showFormats)}>
+                Download as...
+              </button>
+              {showFormats && (
+                <div className="download-dropdown">
+                  {FORMATS.map(f => (
+                    <button key={f.id} className="download-dropdown-item" onClick={() => handleDownload(f.id)}>
+                      {f.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
             <button className="btn-icon" onClick={onClose}>
               Close
             </button>

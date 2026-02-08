@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "egen-agent-sim"
-  }
+  },
+  "targets": {
+    "karthik-patil-sandbox": {
+      "hosting": {
+        "egen-agent-sim": [
+          "egen-agent-sim"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

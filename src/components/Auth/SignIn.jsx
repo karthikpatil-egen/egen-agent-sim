@@ -21,13 +21,12 @@ export default function SignIn({ onSignIn }) {
   return (
     <div className="signin-container">
       <div className="signin-card">
+        <div className="signin-wordmark">egen</div>
         <h1>
-          Egen <span>Agent Simulator</span>
+          Agent <span>simulator</span>
         </h1>
         <p>
-          Watch AI agents collaborate to deliver your client project.
-          <br />
-          Sign in with your Egen Google account to get started.
+          Simulate a full Egen delivery team powered by AI agents collaborating on your project.
         </p>
         <button className="signin-btn" onClick={handleSignIn} disabled={loading}>
           <svg viewBox="0 0 24 24">

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { auth, firebaseAvailable } from '../services/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
+import { isSuperAdmin as checkSuperAdmin } from '../config/admin';
 
 export function useAuth() {
   const [user, setUser] = useState(null);
@@ -39,5 +40,7 @@ export function useAuth() {
     setUser(null);
   }
 
-  return { user, loading, setDemoUser, clearDemoUser };
+  const superAdmin = checkSuperAdmin(user?.email);
+
+  return { user, loading, isSuperAdmin: superAdmin, setDemoUser, clearDemoUser };
 }

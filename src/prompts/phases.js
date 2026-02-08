@@ -12,6 +12,8 @@ export const PHASE_INSTRUCTIONS = {
 6. **Constraints**: Timeline, budget, technology, or regulatory constraints
 7. **Initial Recommendations**: Your high-level recommendations for approach
 
+Structure your deliverable with clear markdown headings (## for sections, ### for subsections). Use markdown tables with proper | column | headers | for any tabular data. Use bullet lists (- item) for enumerated points, not plain text paragraphs. Separate sections with blank lines for readability.
+
 For your chat message, share a brief summary of your findings and any concerns you want the team to be aware of. Be conversational — you're kicking off a team discussion.`,
     },
   },
@@ -27,6 +29,8 @@ For your chat message, share a brief summary of your findings and any concerns y
 5. **Integration Points**: External systems, APIs, and data sources
 6. **Non-Functional Requirements**: Scalability, performance, security approach
 7. **Technical Risks**: Architecture-specific risks and mitigations
+
+Structure your deliverable with clear markdown headings (## for sections, ### for subsections). Use markdown tables with proper | column | headers | for any tabular data. Use bullet lists (- item) for enumerated points. Separate sections with blank lines for readability.
 
 For your chat message, explain your architectural approach to the team, highlighting why you chose this direction and any trade-offs. Reference the Client Partner's findings where relevant.
 
@@ -44,6 +48,8 @@ IMPORTANT: Include a Mermaid diagram in your deliverable using \`\`\`mermaid cod
 6. **Dependencies**: Key dependencies and their impact
 7. **Risk Register**: Top 5-8 project risks with mitigation plans
 
+Structure your deliverable with clear markdown headings (## for sections, ### for subsections). Use markdown tables with proper | column | headers | for any tabular data — especially the backlog, sprint plan, and risk register. Use bullet lists (- item) for enumerated points. Separate sections with blank lines for readability.
+
 For your chat message, share the high-level timeline and sprint approach with the team. Mention how you're incorporating the Client Partner's findings. Be organized and action-oriented.`,
     },
   },
@@ -60,6 +66,8 @@ For your chat message, share the high-level timeline and sprint approach with th
 6. **Storage Strategy**: Database selection, data lake/warehouse design
 7. **Estimated Data Volumes**: Expected data sizes and growth projections
 
+Structure your deliverable with clear markdown headings (## for sections, ### for subsections). Use markdown tables with proper | column | headers | for any tabular data — especially data models and volume estimates. Use bullet lists (- item) for enumerated points. Separate sections with blank lines for readability.
+
 For your chat message, explain your data approach to the team, reference the architect's design, and flag any data-related concerns or dependencies.`,
     },
     'ai-ml-engineer': {
@@ -73,6 +81,8 @@ For your chat message, explain your data approach to the team, reference the arc
 5. **MLOps Plan**: Model versioning, monitoring, retraining strategy
 6. **Build vs Buy Analysis**: When to use pre-built APIs vs custom models
 7. **Ethical Considerations**: Bias, fairness, and responsible AI practices
+
+Structure your deliverable with clear markdown headings (## for sections, ### for subsections). Use markdown tables with proper | column | headers | for any tabular data — especially model comparison and evaluation metrics. Use bullet lists (- item) for enumerated points. Separate sections with blank lines for readability.
 
 For your chat message, share your AI/ML recommendations with the team, reference the architecture, and discuss how AI adds value to this specific project.`,
     },
@@ -88,6 +98,8 @@ For your chat message, share your AI/ML recommendations with the team, reference
 6. **Cost Estimate**: Monthly/annual cost breakdown by service
 7. **Disaster Recovery**: Backup, HA, and DR strategy
 
+Structure your deliverable with clear markdown headings (## for sections, ### for subsections). Use markdown tables with proper | column | headers | for any tabular data — especially cost estimates and service breakdowns. Use bullet lists (- item) for enumerated points. Separate sections with blank lines for readability.
+
 For your chat message, present your infrastructure plan to the team, reference the architecture, and share cost estimates. Flag any infrastructure constraints.`,
     },
     'fullstack-developer': {
@@ -101,6 +113,8 @@ For your chat message, present your infrastructure plan to the team, reference t
 5. **Demo Plan**: What will be shown in the first demo, and when
 6. **Frontend Tech Stack**: Framework, state management, styling
 7. **Development Workflow**: Branching strategy, PR process, coding standards
+
+Structure your deliverable with clear markdown headings (## for sections, ### for subsections). Use markdown tables with proper | column | headers | for any tabular data — especially API endpoints and MVP features. Use bullet lists (- item) for enumerated points. Separate sections with blank lines for readability.
 
 For your chat message, share your application approach and MVP plan with the team. Reference the architecture and project plan. Focus on what users will see and interact with first.`,
     },
@@ -118,6 +132,8 @@ For your chat message, share your application approach and MVP plan with the tea
 6. **Security Testing**: OWASP top 10, penetration testing approach
 7. **Quality Gates**: Release criteria, code coverage targets
 8. **Acceptance Criteria**: Key acceptance criteria organized by epic
+
+Structure your deliverable with clear markdown headings (## for sections, ### for subsections). Use markdown tables with proper | column | headers | for any tabular data — especially test scenarios and quality gates. Use bullet lists (- item) for enumerated points. Separate sections with blank lines for readability.
 
 For your chat message, present your test strategy to the team, referencing specific concerns from other agents' outputs. Call out any gaps or risks you've identified from reviewing their work.`,
     },
@@ -137,6 +153,8 @@ For your chat message, present your test strategy to the team, referencing speci
 8. **Next Steps**: Immediate actions for project kickoff
 9. **Key Decisions Needed**: Decisions that need client input
 
+Structure your deliverable with clear markdown headings (## for sections, ### for subsections). Use markdown tables with proper | column | headers | for any tabular data — especially timelines, budgets, and risk summaries. Use bullet lists (- item) for enumerated points. Separate sections with blank lines for readability.
+
 For your chat message, present the final report to the team as a wrap-up. Thank each specialist for their contributions and highlight the key takeaways.`,
     },
     'client-partner': {
@@ -150,6 +168,8 @@ For your chat message, present the final report to the team as a wrap-up. Thank 
 5. **Industry Insights**: Relevant trends and competitive considerations
 6. **Partnership Value**: How Egen can be a long-term strategic partner
 7. **Estimated Impact**: Business value estimates for each opportunity
+
+Structure your deliverable with clear markdown headings (## for sections, ### for subsections). Use markdown tables with proper | column | headers | for any tabular data — especially opportunity estimates and impact. Use bullet lists (- item) for enumerated points. Separate sections with blank lines for readability.
 
 For your chat message, share your growth recommendations with the team. Frame these as opportunities to deliver even more value to the client. End with an encouraging note about the project.`,
     },

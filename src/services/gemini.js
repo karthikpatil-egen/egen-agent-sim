@@ -110,6 +110,49 @@ export async function callGeminiStreaming({ apiKey, systemPrompt, userPrompt, on
   }
 }
 
+// Schema-based non-streaming call (for insights)
+export async function callGeminiWithSchema({ apiKey, systemPrompt, userPrompt, responseSchema, maxTokens = 8192 }) {
+  const url = `${GEMINI_API_BASE}/${MODEL}:generateContent?key=${apiKey}`;
+
+  const body = {
+    system_instruction: {
+      parts: [{ text: systemPrompt }],
+    },
+    contents: [
+      {
+        role: 'user',
+        parts: [{ text: userPrompt }],
+      },
+    ],
+    generationConfig: {
+      temperature: 0.7,
+      maxOutputTokens: maxTokens,
+      responseMimeType: 'application/json',
+      responseSchema,
+    },
+  };
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+
+  if (!response.ok) {
+    const error = await response.text();
+    throw new Error(`Gemini API error (${response.status}): ${error}`);
+  }
+
+  const data = await response.json();
+  const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+  try {
+    return JSON.parse(text);
+  } catch {
+    throw new Error('Failed to parse insights response as JSON');
+  }
+}
+
 // Non-streaming fallback
 export async function callGemini({ apiKey, systemPrompt, userPrompt }) {
   const url = `${GEMINI_API_BASE}/${MODEL}:generateContent?key=${apiKey}`;
